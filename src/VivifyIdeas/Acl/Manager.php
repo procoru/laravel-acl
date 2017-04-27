@@ -489,7 +489,11 @@ class Manager
      */
     public function getChildGroups($id, $selfinclude = true, $recursive = true)
     {
-        $groups = $this->getGroups();
+        static $groups = null;
+        
+        if ($groups === null) {
+            $groups = $this->getGroups();
+        }
 
         $childs = array();
         foreach ($groups as $group) {
